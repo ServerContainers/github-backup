@@ -9,5 +9,5 @@ Automate using `cron` or `systemd` etc.
 
 ```
 mkdir repos
-docker run -ti -v "$PWD:/data" servercontainers/github-backup github-backup.sh ServerContainers /data/repos/
+docker run -ti --rm -v "$PWD:/data" servercontainers/github-backup github-backup.sh ServerContainers /data/repos/
 ```
