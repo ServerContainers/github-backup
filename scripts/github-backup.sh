@@ -10,8 +10,12 @@ backup_dir="$2"
 
 gh_url="https://github.com/"
 
-repos=$(wget -O - "$gh_url$gh_user/" 2>/dev/null | sed -n '/"repository"/s/.*href="\/\([^"]\+\).*/\1/p')
-
+if echo "$gh_user" | grep '/' >2/dev/null >/dev/null; then
+  echo "given single repo to backup..."
+  repos="$gh_user"
+else
+  repos=$(wget -O - "$gh_url$gh_user/" 2>/dev/null | sed -n '/"repository"/s/.*href="\/\([^"]\+\).*/\1/p')
+fi
 
 cd "$backup_dir"
 
