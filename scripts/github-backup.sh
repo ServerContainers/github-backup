@@ -10,7 +10,7 @@ backup_dir="$2"
 
 gh_url="https://github.com/"
 
-if echo "$gh_user" | grep '/' >2/dev/null >/dev/null; then
+if echo "$gh_user" | grep '/' 2>/dev/null >/dev/null; then
   echo "given single repo to backup..."
   repos="$gh_user"
 else
