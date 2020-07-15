@@ -21,16 +21,16 @@ cd "$backup_dir"
 
 for repo in $repos; do
   echo -n "repo: $gh_url$repo ... "
-  if [ -d "$repo" ] && [ -d "$repo/.git" ]; then
+  if [ -d "$repo.git" ] && [ -d "$repo.git/.git" ]; then
     echo "pulling changes"
-    cd "$repo"
+    cd "$repo.git"
     git pull
     cd - >/dev/null
   else
     echo "cloning repo"
     mkdir -p "$repo"
     rmdir "$repo"
-    git clone "$gh_url$repo" "$repo"
+    git clone "$gh_url$repo" "$repo.git"
   fi
   echo
 done
