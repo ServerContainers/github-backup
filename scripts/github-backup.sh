@@ -14,7 +14,7 @@ if echo "$gh_user" | grep '/' 2>/dev/null >/dev/null; then
   echo "given single repo to backup..."
   repos="$gh_user"
 else
-  repos=$(wget -O - "$gh_url$gh_user/" 2>/dev/null | sed -n '/"repository"/s/.*href="\/\([^"]\+\).*/\1/p')
+  repos=$(wget -O - "$gh_url$gh_user""?tab=repositories" 2>/dev/null | sed -n '/[Rr]epository"/s/.*href="\/\([^"]\+\).*/\1/p' | sort | uniq
 fi
 
 cd "$backup_dir"
