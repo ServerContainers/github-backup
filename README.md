@@ -8,6 +8,8 @@ Automate using `cron` or `systemd` etc.
 
 ## Changelogs
 
+* 2021-03-21
+    * support for multiple pages of github profiles
 * 2020-11-05
     * multiarch build
 
