@@ -2,6 +2,8 @@
 
 [ $# -ne 2 ] && >&2 echo "usage: script.sh <github_user> <dir_to_store_repos>" && exit 1
 
+
+
 gh_user="$1"
 backup_dir="$2"
 
@@ -38,7 +40,12 @@ if echo "$gh_user" | grep '/' 2>/dev/null >/dev/null; then
   echo "given single repo to backup..."
   repos="$gh_user"
 else
-  find_repo "$gh_url$gh_user""?tab=repositories"
+  if [ "x$TAB" == "x" ]; then
+    TAB="repositories"
+  fi
+  echo "using tab: $TAB"
+
+  find_repo "$gh_url$gh_user""?tab=$TAB"
   echo "list of repos:"
   echo "$repos"
 fi
