@@ -13,6 +13,10 @@ find_repo() {
   url="$1"
   page=$(wget -O - "$url" 2>/dev/null)
   reposFound=$(echo "$page" | sed -n '/[Rr]epository"/s/.*href="\/\([^"]\+\).*/\1/p' | sort | uniq)
+  if [ "$TAB" == "stars" ]; then # stars have a bit different rendering...
+    reposFound=$(echo "$page" | sed -n '/<a href="\/[^\/]*\/[^\/]*">/s/.*href="\/\([^"]\+\).*/\1/p' | grep -v '^features/\|^contact/report-abuse' | sort | uniq)
+  fi
+
   next_url=$(echo "$page" | sed -n '/?after/s/.*href="\([^"]\+\).*/\1/p' | grep .)
 
   if [ "x$reposFound" != "x" ]; then
