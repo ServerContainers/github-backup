@@ -25,5 +25,14 @@ Automate using `cron` or `systemd` etc.
 
 ```
 mkdir repos
+# backup ServerContainers repos
 docker run -ti --rm -v "$PWD:/data" servercontainers/github-backup github-backup.sh ServerContainers /data/repos/
+
+# backup MarvAmBass repositories
+docker run -ti --rm -v "$PWD:/data" servercontainers/github-backup github-backup.sh MarvAmBass /data/repos/
+
+# backup MarvAmBass starred repositories in special folder
+mkdir -p repos/MarvAmBass.stars
+docker run -ti --rm -v "$PWD:/data" -e 'TAB=stars' servercontainers/github-backup github-backup.sh MarvAmBass /data/repos/MarvAmBass.stars
+
 ```
