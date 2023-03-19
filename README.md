@@ -5,9 +5,35 @@ Docker Container to be used to Backup GitHub Repositories
 
 Automate using `cron` or `systemd` etc.
 
+## IMPORTANT!
+
+In March 2023 - Docker informed me that they are going to remove my 
+organizations `servercontainers` and `desktopcontainers` unless 
+I'm upgrading to a pro plan.
+
+I'm not going to do that. It's more of a professionally done hobby then a
+professional job I'm earning money with.
+
+In order to avoid bad actors taking over my org. names and publishing potenial
+backdoored containers, I'd recommend to switch over clone my github repos and
+build the containers yourself.
+
+## Build & Variants
+
+You can specify `DOCKER_REGISTRY` environment variable (for example `my.registry.tld`)
+and use the build script to build the main container and it's variants for _x86_64, arm64 and arm_
+
+You'll find all images tagged like `a3.15.0-gMonFeb2219063620210100` which means `a<alpine version>-g<github-backup-latest-commit-date>`.
+This way you can pin your installation/configuration to a certian version. or easily roll back if you experience any problems
+(don't forget to open a issue in that case ;D).
+
+To build a `latest` tag run `./build.sh release`
 
 ## Changelogs
 
+* 2023-03-19
+    * switched from docker hub to a build-yourself container
+    * new way of multiarch build
 * 2021-06-08
     * support for starred repos of a user/profile
 * 2021-03-21
@@ -26,13 +52,13 @@ Automate using `cron` or `systemd` etc.
 ```
 mkdir repos
 # backup ServerContainers repos
-docker run -ti --rm -v "$PWD:/data" servercontainers/github-backup github-backup.sh ServerContainers /data/repos/
+docker run -ti --rm -v "$PWD:/data" github-backup github-backup.sh ServerContainers /data/repos/
 
 # backup MarvAmBass repositories
-docker run -ti --rm -v "$PWD:/data" servercontainers/github-backup github-backup.sh MarvAmBass /data/repos/
+docker run -ti --rm -v "$PWD:/data" github-backup github-backup.sh MarvAmBass /data/repos/
 
 # backup MarvAmBass starred repositories in special folder
 mkdir -p repos/MarvAmBass.stars
-docker run -ti --rm -v "$PWD:/data" -e 'TAB=stars' servercontainers/github-backup github-backup.sh MarvAmBass /data/repos/MarvAmBass.stars
+docker run -ti --rm -v "$PWD:/data" -e 'TAB=stars' github-backup github-backup.sh MarvAmBass /data/repos/MarvAmBass.stars
 
 ```
