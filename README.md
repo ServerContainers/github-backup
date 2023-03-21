@@ -1,5 +1,5 @@
-github-backup - simple github backup tool
-=========================================
+github-backup - simple github backup tool (ghcr.io/servercontainers/github-backup) [x86 + arm]
+==============================================================================================
 
 Docker Container to be used to Backup GitHub Repositories
 
