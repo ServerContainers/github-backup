@@ -4,5 +4,5 @@ services:
 
   github-backup:
     build: .
-    image: github-backup
+    image: ghcr.io/servercontainers/github-backup
     restart: never
